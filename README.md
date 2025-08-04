@@ -28,7 +28,7 @@ A modern, responsive weather forecast web application built using HTML, CSS, Jav
 ## 🖼️ Screenshots
 
 ### 💻 Desktop View
-![Desktop View](image.png)
+![Desktop View](Image.png)
 
 ### 📱 Mobile View
 ![Mobile View](image-1.png)
