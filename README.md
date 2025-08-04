@@ -41,4 +41,4 @@ A modern, responsive weather forecast web application built using HTML, CSS, Jav
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/BesthaPramodRao/Weather-Forecast.git
