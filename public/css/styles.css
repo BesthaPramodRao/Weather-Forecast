@@ -1,0 +1,472 @@
+:root {
+  --primary-bg: linear-gradient(135deg, #cfd9e3 0%, #99aabd 100%);
+  --card-bg: rgba(206, 198, 198, 0.448);
+  --card-hover: rgba(185, 205, 225, 0.98);
+  --font-color: #212b4a;
+  --accent: #4c6eae;
+  --accent-dark: #4372d8;
+  --shadow: 0 4px 24px 0 rgba(80, 120, 200, 0.10);
+  --border: 1px solid #e3e8ee;
+  --radius: 18px;
+  --transition: all 0.25s cubic-bezier(.25,.8,.25,1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--primary-bg);
+  font-family: 'Poppins', 'Comfortaa', 'Roboto', sans-serif;
+  color: var(--font-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+  animation: fadeIn 1s ease-in;
+  margin-right: 0; /* Remove right margin so cards can touch the screen edge */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.searchBar {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  background: transparent;
+}
+
+.searchBarParentDiv {
+  width: 50%;
+  position: relative;
+  max-width: 600px;
+}
+
+.inputfield {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 40px;
+  border: var(--border);
+  outline: none;
+  background: #fff;
+  color: var(--font-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.inputfield:focus {
+  box-shadow: 0 0 0 3px var(--accent);
+  background: #f0f6ff;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--accent-dark);
+  background: #f0f6ff;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(80,120,200,0.08);
+  transition: var(--transition);
+}
+
+.searchIcon:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.mainContentParentDiv {
+  display: flex;
+  height: 90vh;
+  padding: 24px;
+  gap: 28px;
+  margin-right: 0; /* Remove right margin so rightDiv can touch the edge */
+}
+
+.leftDiv {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.leftChild {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: var(--transition);
+  margin-bottom: 0;
+}
+
+.leftChild:hover {
+  background: var(--card-hover);
+  transform: translateY(-4px) scale(1.01);
+}
+
+#cityName {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  letter-spacing: 1px;
+}
+
+#cityTemp {
+  font-size: 2rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+#skyDisc {
+  font-size: 1.1rem;
+  color: #596b85;
+  font-weight: 500;
+}
+
+.line {
+  border: none;
+  border-top: 2.5px solid #e0e7ef;
+  margin: 10px 0;
+}
+
+#date, #time {
+  font-size: 1rem;
+  color: #596b85;
+  font-weight: 500;
+}
+
+.rightDiv {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: space-between;
+  margin-right: 0px;
+}
+
+.rightRow {
+  margin-right: 15px;
+}
+
+#comingFiveDaysTitle {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent-dark);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+#forecastContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 18px;
+  padding: 10px 0;
+}
+
+.forecastRow {
+  background: var(--card-bg);
+  padding: 18px 12px;
+  border-radius: var(--radius);
+  min-width: 150px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.forecastRow:hover {
+  background: var(--card-hover);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.forecastRow h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.forecastRow small {
+  color: #596b85;
+  font-size: 0.95rem;
+}
+
+#todayTempContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  padding: 18px 0 18px 0;
+  margin-right: 10px;
+  /* Remove flex-specific properties */
+  overflow-x: unset;
+  scroll-snap-type: none;
+  scrollbar-width: thin;
+}
+
+@media only screen and (max-width: 767px) {
+  #todayTempContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+    margin-right: 0;
+  }
+}
+
+.todayTemp {
+  flex: 0 0 160px;
+  min-width: 160px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 18px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  scroll-snap-align: start;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: var(--transition);
+}
+
+.todayTemp:hover {
+  background: var(--card-hover);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.todayTemp img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.todayTemp h6 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--accent-dark);
+}
+
+.todayTemp h5 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.extraMetric,
+.rowTwoDiv {
+  background: var(--card-bg);
+  padding: 18px 14px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.extraMetric:hover,
+.rowTwoDiv:hover {
+  background: var(--card-hover);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.extraMetric img,
+.rowTwoDiv img {
+  filter: drop-shadow(0 2px 8px #4f8cff22);
+}
+
+.extraMetric h6 {
+  font-size: 1rem;
+  color: var(--font-color);
+  font-weight: 500;
+}
+
+.rightRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.rowOne h5, .rowTwoDiv h5{
+  color: var(--accent-dark);
+}
+
+#sunriseTime h5, #sunsetTime h5,
+#humidityVal, #feelsLikeVal, #pressureVal, #visibilityVal, #windSpeed {
+  color: var(--accent);
+}
+
+.rowTwoDiv {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 50%;
+  height: 200px;
+  background: var(--card-bg);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: var(--border);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 32px 32px;
+  margin: 0;
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1100px) {
+  .mainContentParentDiv {
+    flex-direction: column;
+    height: auto;
+    padding: 12px;
+    gap: 18px;
+    margin-right: 0;
+  }
+  .rightRow.rowTwo {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .rowTwoDiv,
+  .airQuality.rowTwoDiv,
+  .sunRise.rowTwoDiv {
+    min-width: unset;
+    width: 100%;
+    height: 180px;
+    padding: 20px 12px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .mainContentParentDiv {
+    flex-direction: column;
+    padding: 8px;
+    gap: 14px;
+    height: auto;
+  }
+  .leftDiv, .rightDiv {
+    width: 100%;
+    min-width: unset;
+  }
+  .leftChild {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 16px 8px;
+  }
+  .nextFiveDays.leftChild {
+    padding: 12px 8px;
+  }
+  .rightDiv {
+    padding-right: 0;
+    gap: 18px;
+  }
+  .rightRow {
+    margin-right: 0;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .rowOne {
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch !important;
+  }
+  .extraMetric {
+    width: 45%;
+    justify-content: center;
+    padding: 10px 8px;
+    gap: 10px;
+  }
+  #forecastContainer {
+    gap: 10px;
+    padding: 0;
+  }
+  .forecastRow {
+    min-width: 120px;
+    padding: 10px 4px;
+  }
+  .todayTemp {
+    min-width: 120px;
+    padding: 10px 4px;
+  }
+  #todayTempContainer {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0;
+    margin-right: 0;
+  }
+  .rowTwoDiv,
+  .airQuality.rowTwoDiv,
+  .sunRise.rowTwoDiv {
+    width: 100%;
+    min-width: unset;
+    max-width: 100%;
+    height: auto;
+    padding: 16px 8px;
+    gap: 12px;
+  }
+  .airQuality.rowTwoDiv .d-flex,
+  .sunRise.rowTwoDiv .d-flex {
+    gap: 10px;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .airQuality.rowTwoDiv img,
+  .sunRise.rowTwoDiv img {
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: 8px;
+  }
+  .airQuality.rowTwoDiv .text-center,
+  .sunRise.rowTwoDiv .sunriseDiv,
+  .sunRise.rowTwoDiv .sunsetDiv {
+    margin: 0 4px;
+  }
+  .sunRise.rowTwoDiv .sunriseDiv img,
+  .sunRise.rowTwoDiv .sunsetDiv img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .rowTwoDiv h5 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  #comingFiveDaysTitle {
+    font-size: 1.2rem;
+  }
+  .inputfield {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+  .searchBarParentDiv {
+    width: 98%;
+    max-width: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dark);
+  border-radius: 8px;
+}
